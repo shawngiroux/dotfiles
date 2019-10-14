@@ -93,3 +93,6 @@ nnoremap <Leader>t :Tab /= <CR>
 nnoremap <Leader>y :Tab /:\zs/l0l1
 nnoremap <Leader>u :!spicetify update
 nmap <Leader>f :TagbarToggle<CR>
+
+" Remove trailing whitespace
+nnoremap <Leader>ws :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
