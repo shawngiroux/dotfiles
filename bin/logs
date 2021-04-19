@@ -1,0 +1,16 @@
+#!/bin/bash
+esc=$(printf '\033')
+
+#https://unix.stackexchange.com/questions/45924/using-sed-to-color-the-output-from-a-command-on-solaris
+#https://unix.stackexchange.com/questions/8414/how-to-have-tail-f-show-colored-output
+#tail -f /path/to/log | sed --unbuffered \
+    #-e 's/\(.*INFO.*\)/\o033[32m\1\o033[39m/' \
+    #-e 's/\(.*SEVERE.*\)/\o033[31m\1\o033[39m/'
+
+tail -f /tmp/php_error.log | sed \
+    -e "s/\(.*PHP.*Notice.*\)/${esc}[32m\1${esc}[39m/" \
+    -e "s/\(.*PHP.*Deprecated.*\)/${esc}[35m\1${esc}[39m/" \
+    -e "s/\(.*PHP.*Warning.*\)/${esc}[33m\1${esc}[39m/" \
+    -e "s/\(.*PHP.*Tag Test.*\)/${esc}[36m\1${esc}[39m/" \
+    -e "s/\(.*PHP.*Fatal.*\)/${esc}[31m\1${esc}[39m/" \
+    -e "s/\(.*PHP.*Parse error.*\)/${esc}[31m\1${esc}[39m/"
