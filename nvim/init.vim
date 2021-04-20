@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'mattn/emmet-vim'
@@ -13,6 +14,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -21,7 +23,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
-Plug 'jiangmiao/auto-pairs'
 
 " Initialize plugin system
 call plug#end()
@@ -56,6 +57,8 @@ set mouse=a
 
 set nocompatible
 
+set encoding=utf8
+
 set maxmempattern=5000
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -82,6 +85,14 @@ endif
 
 syntax on
 colorscheme onedark
+
+" Italics
+highlight Comment cterm=italic gui=italic
+highlight Type cterm=italic gui=italic
+highlight Statement cterm=italic gui=italic
+
+" Bolds
+highlight Function cterm=bold gui=bold
 
 "*************************************
 "     ____  __            _
