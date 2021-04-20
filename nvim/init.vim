@@ -89,10 +89,18 @@ colorscheme onedark
 " Italics
 highlight Comment cterm=italic gui=italic
 highlight Type cterm=italic gui=italic
-highlight Statement cterm=italic gui=italic
+highlight Conditional cterm=italic gui=italic
+highlight Repeat cterm=italic gui=italic
+
+" JS Keyword Highlights
+highlight jsThis cterm=italic gui=italic
+highlight jsExport cterm=italic gui=italic
+highlight jsExportDefault cterm=italic gui=italic
 
 " Bolds
 highlight Function cterm=bold gui=bold
+
+" Note: You can do :exe 'hi '.synIDattr(synstack(line('.'), col('.'))[-1], 'name') to see what highlight group the item under cursor belongs to.
 
 "*************************************
 "     ____  __            _
@@ -129,6 +137,12 @@ set wildignore+=*/vendor
 
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
+
+" Vim Devicons
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 
 " Vim Airline
 let g:airline_theme='onedark'
