@@ -94,6 +94,8 @@ highlight Repeat cterm=italic gui=italic
 
 " JS Keyword Highlights
 highlight jsThis cterm=italic gui=italic
+highlight jsImport cterm=italic gui=italic
+highlight jsFrom cterm=italic gui=italic
 highlight jsExport cterm=italic gui=italic
 highlight jsExportDefault cterm=italic gui=italic
 
