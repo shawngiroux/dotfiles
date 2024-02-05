@@ -4,9 +4,10 @@
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'joshdick/onedark.vim'
+"Plug 'joshdick/onedark.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'mattn/emmet-vim'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -22,6 +23,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
+Plug 'vim-vdebug/vdebug'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 
@@ -52,7 +54,6 @@ set smartcase
 
 set splitright
 set splitbelow
-
 set clipboard=unnamedplus
 set mouse=a
 
@@ -61,6 +62,15 @@ set nocompatible
 set encoding=utf8
 
 set maxmempattern=5000
+"set maxmempattern=50000
+
+set nocursorline
+set nocursorcolumn
+
+set re=0
+
+syntax sync minlines=200
+syntax sync maxlines=500
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -85,7 +95,9 @@ if exists('+termguicolors')
 endif
 
 syntax on
-colorscheme onedark
+"colorscheme onedark
+colorscheme catppuccin-macchiato
+hi Normal guibg=NONE ctermbg=NONE
 
 " Italics
 highlight Comment cterm=italic gui=italic
@@ -104,6 +116,9 @@ highlight jsExportDefault cterm=italic gui=italic
 highlight Function cterm=bold gui=bold
 
 " Note: You can do :exe 'hi '.synIDattr(synstack(line('.'), col('.'))[-1], 'name') to see what highlight group the item under cursor belongs to.
+
+"let g:python3_host_prog = expand('/usr/bin/python3')
+let g:python3_host_prog = expand('/opt/homebrew/bin/python3')
 
 "*************************************
 "     ____  __            _
@@ -199,6 +214,12 @@ let g:tagbar_type_rust = {
   \ },
 \ }
 
+if !exists('g:vdebug_options')
+    let g:vdebug_options = {}
+endif
+let g:vdebug_options.port = 9003
+let g:vdebug_options.path_maps = {'/var/www/html' : getcwd()}
+
 "******************************
 "     ____  _           __
 "    / __ )(_)___  ____/ /____
@@ -243,7 +264,7 @@ noremap <leader>9 9gt
 
 " Git shortcuts
 map <leader>gs :Gstatus<CR>
-map <leader>gb :Gblame<CR>
+map <leader>gb :Git blame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gp :Gpush<CR>
 map <leader>gf :diffget //3<CR>
@@ -267,5 +288,11 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 nmap <leader>f :TagbarToggle<CR>
